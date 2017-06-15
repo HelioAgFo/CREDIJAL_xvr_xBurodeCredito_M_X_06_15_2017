@@ -41,7 +41,7 @@ Select --c.PKOportunity,
 	 --,UPPER(substring(rtrim(c.Domicilio),40,len(rtrim(b.Domicilio)))) AS 'SEGUNDA LINEA DE DIRECCION'
 	 ,UPPER('') AS 'SEGUNDA LINEA DE DIRECCION'
 	 ,UPPER(c.new_Colonia) AS 'COLONIA O  POBLACION'
-	 ,UPPER(c.new_Ciudad) AS 'DELEGACION O MUNICIPIO'
+	 ,UPPER(c.new_delegacion) AS 'DELEGACION O MUNICIPIO'
 	 ,UPPER(c.new_Ciudad) AS 'CIUDAD'
 	 ,UPPER(case when b.state = 'D.F' then 'DF'
 	 when b.state = 'EDO' then 'EM'
@@ -149,7 +149,7 @@ Select --c.PKOportunity,
 	 --,UPPER(substring(rtrim(c.Domicilio),40,len(rtrim(b.Domicilio)))) AS 'SEGUNDA LINEA DE DIRECCION DEL AVAL'
 	 ,UPPER(CASE WHEN c.cliente_aval = 'Aval' then c.new_colonia else '' End) AS 'COLONIA O POBLACION'
 	 --,UPPER(c.new_colonia) AS 'COLONIA O POBLACION'
-	 ,UPPER(CASE WHEN c.cliente_aval = 'Aval' then c.new_Ciudad else '' End) AS 'DELEGACION O MUNICIPIO**'
+	 ,UPPER(CASE WHEN c.cliente_aval = 'Aval' then c.new_delegacion else '' End) AS 'DELEGACION O MUNICIPIO**'
 	 --,UPPER(c.new_Ciudad) AS 'DELEGACION O MUNICIPIO**'
 	 ,UPPER(CASE WHEN c.cliente_aval = 'Aval' then c.new_Ciudad else '' End) AS 'CIUDAD**'
 	 --,UPPER(c.new_Ciudad) AS 'CIUDAD**'
@@ -308,7 +308,7 @@ Select --c.PKOportunity,
 		--		group by x.CUSTID,x.user5,x.periodo,x.adjamt
 		--		order by Max(x.DateAppl) desc),0))) AS 'MONTO DE ULTIMO PAGO'
 	  from [xRptRuntime_Reportes] x ,
-	  [xvr_xBurodeCredito08610] Agit 
+	  [xvr_xBurodeCredito08610] A
 	 INNER JOIN xSOAddress B ON A.CUSTID = B.CUSTID
 	 INNER JOIN [xvr_xCustomerSL_Opportunity] C ON A.CustID = C.PKCustomerSL
 	 AND A.NoContrato COLLATE DATABASE_DEFAULT  = C.new_numcontrato
